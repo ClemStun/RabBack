@@ -6,7 +6,7 @@ const inc = require('./DataManager/insertNewAccount.js');
 const lin = require('./DataManager/connectionToAccount.js');
 const fav = require('./DataManager/favorisManger.js');
 
-const uri = process.env.URI;
+const uri = "mongodb+srv://" + process.env.USER + ":" + process.env.PASS + "@" + process.env.LINK + "/radar_a_beats?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 const app = express();
