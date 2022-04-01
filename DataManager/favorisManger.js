@@ -54,6 +54,37 @@ module.exports = {
 
         return retour;
 
+    },
+
+    removeFavoris: async function (client, login, t, a){
+
+	let retour = -1;
+
+	try{
+
+	    await client.connect();
+	    console.log("*** Connected correctly to server  ***")
+		
+	    const db = client.db(dbName);
+	    const col = db.collection(login);
+
+	    let nbDel = await col.deleteOne({
+		title: t,
+		artiste: a
+	    })
+	
+	    if(nbDel.deletedCount > 0){
+		retour = 1
+	    }
+
+	}catch(e){
+	    console.log(e);
+	}finally{
+	    client.close();
+	}
+
+	return retour;
+
     }
 
 }
