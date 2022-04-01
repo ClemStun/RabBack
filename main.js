@@ -142,4 +142,38 @@ app.get('/favorisadd', (req, res) => {
 
 })
 
+app.get('/favorisremove', (req, res) => {
+
+	let login = req.query.login;
+  	let title = req.query.title;
+	let artiste = req.query.artiste;
+
+	if(login != null && title != null && artiste != null){
+
+		fav.removeFavoris(client, login, title, artiste).then(r => {
+
+			if(r == 1){
+			
+				res.json({
+					remove: true,
+					message: "Supression du favoris reussi !"
+				})
+
+			}else if(r == -1){
+
+				res.json({
+					remove: false,
+					message: "Suppression impossible"
+				})
+
+			}
+
+		})
+
+	}else{
+		res.json({});
+	}
+
+})
+
 app.listen(process.env.PORT || 80);
